@@ -1,0 +1,65 @@
+{
+  "name": "fullstack-app",
+  "version": "1.0.0",
+  "description": "Serverless fullstack application",
+  "main": "index.js",
+  "repository": "git@github.com:lucashfreitas/serverless-graphql-fullstack-starter.git",
+  "author": "Lucas Santos <lucashfreitas1@gmail.com>",
+  "license": "private",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.8.7",
+    "@types/aws-lambda": "^8.10.62",
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^14.0.25",
+    "@types/react": "^16.9.55",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-import-resolver-webpack": "^0.12.2",
+    "eslint-plugin-graphql": "^4.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.2",
+    "serverless": "^2.4.0",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "serverless-offline": "^6.8.0",
+    "serverless-prune-plugin": "^1.4.3",
+    "serverless-webpack": "^5.3.5",
+    "ts-loader": "^8.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {
+    "date-fns": "^2.16.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "reflect-metadata": "^0.1.13"
+  },
+  "scripts": {
+    "bootstrap": "npx lerna bootstrap ",
+    "prepare": "npx lerna run prepare",
+    "clean": "npx lerna exec yarn clean --scope --PROJECT_TO_CLEAN ",
+    "dev:api": "lerna exec yarn dev --scope @app/api",
+    "dev:front": "lerna exec yarn dev --scope @app/front",
+    "lint": "eslint --ext .js,.ts,.gql,.graphql src/",
+    "format:api": "lerna exec yarn format --scope @app/api",
+    "format": "npm run prettier --list-different"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}

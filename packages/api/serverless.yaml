@@ -1,0 +1,123 @@
+service: application-api
+
+# Use serverless-webpack plugin to transpile ES6/ES7
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+  - serverless-webpack
+  - serverless-prune-plugin
+
+# Enable auto-packing of external modules
+custom:
+  stage: ${opt:stage,'dev'}
+  prune:
+    automatic: true
+    number: 5
+  serverless-offline:
+    port: 3002
+  webpack:
+    webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+    includeModules: true # Node modules configuration for packaging
+    packager: 'yarn' # Reserved for future use. Any other values will not work right now.
+    packExternalModulesMaxBuffer: 204800 # Size of stdio buffers for spawned child processes
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  cfLogs: true
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    USER_TABLE: users
+
+package:
+  individually: true
+
+functions:
+  graphql:
+    role: ApplicationApiRole
+    handler: src/graphql/graphql-api.handler
+    events:
+      - http:
+          path: /graphql
+          method: post
+          cors: true
+          integration: lambda-proxy
+      - http:
+          path: /graphql
+          method: get
+          cors: true
+          integration: lambda-proxy
+resources:
+  Resources:
+    UserTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+        TableName: ${self:provider.environment.USER_TABLE}
+    AppApiRole:
+      Type: 'AWS::IAM::Role'
+      Properties:
+        RoleName: 'DynamoRole'
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Principal:
+                Service:
+                  - 'lambda.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: 'Dynamo-CloudWatch-Policy'
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: 'Allow'
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'arn:aws:logs:us-east-1:470917430503:log-group:/aws/lambda/app-api-development-graphql:*'
+          - PolicyName: 'Dynamo-ServiceRole-Policy'
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: 'Allow'
+                  Action:
+                    - 'dynamodb:Query'
+                    - 'dynamodb:BatchWriteItem'
+                    - 'dynamodb:GetItem'
+                    - 'dynamodb:DeleteItem'
+                    - 'dynamodb:PutItem'
+                    - 'dynamodb:Scan'
+                    - 'dynamodb:UpdateItem'
+                  Resource:
+                    - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USER_TABLE}'
+    XrayLambdaRolePolicy:
+      Type: 'AWS::IAM::Policy'
+      Properties:
+        PolicyName: 'xray-policy'
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Action:
+                - 'xray:PutTraceSegments'
+                - 'xray:PutTelemetryRecords'
+              Resource:
+                - '*'
+        Roles:
+          - Ref: AppApiRole

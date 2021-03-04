@@ -1,0 +1,21 @@
+version: '3'
+services:
+  serverless-db:
+    tty: true
+    container_name: serverless-db
+    image: 'mysql:8.0.16'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: serverless-db
+    ports:
+      - '3306:3306'
+    networks:
+      - app-network
+    volumes:
+      - dbdata:/var/lib/mysql/
+volumes:
+  dbdata:
+    driver: local
+networks:
+  app-network:
+    driver: bridge

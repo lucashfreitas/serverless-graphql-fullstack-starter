@@ -1,0 +1,39 @@
+{
+  "name": "@app/api",
+  "version": "1.0.0",
+  "description": "Serverless api",
+  "main": "index.js",
+  "scripts": {
+    "local": "npx sls invoke local --function graphql",
+    "dev": "npx sls offline --dontPrintOutput --stage dev",
+    "deploy:dev": "yarn nexus && npx sls deploy --stage development --aws-profile app-dev",
+    "deploy::prod": "yarn build && npx sls deploy --stage production",
+    "migrate": "npx prisma db push --preview-feature",
+    "studio": "npx prisma studio",
+    "nexus": "NEXUS_SHOULD_GENERATE_ARTIFACTS=true=true ts-node --transpile-only src/graphql/schema",
+    "generate": "npx prisma introspect && npx prisma generate && npm -s run generate:nexus",
+    "lint": "eslint --ext .js,.ts,.gql,.graphql src/",
+    "prettier": "prettier --ignore-path .gitignore  \"**/*.+(js|ts|json)\"",
+    "format": "npm run prettier --list-different",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Santos",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "@app/lib": "^1.0.0",
+    "@nexus/schema": "0.16.0",
+    "apollo-server-lambda": "^2.19.0",
+    "aws-sdk": "^2.790.0",
+    "class-validators": "^1.0.1",
+    "date-fns": "^2.16.1",
+    "graphql": "^15.4.0",
+    "graphql-scalars": "^1.4.1",
+    "graphql-shield": "^7.4.0",
+    "graphql-yoga": "^1.18.3",
+    "inversify": "^5.0.1",
+    "nexus-plugin-prisma": "^0.23.1",
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^8.3.1"
+  }
+}

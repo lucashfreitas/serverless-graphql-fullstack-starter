@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "dom.iterable", "esnext", "esnext.asynciterable"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "pretty": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "target": "es2018"
+  },
+  "baseUrl": ".",
+  "paths": {
+    "@app/*": ["./*/src"]
+  },
+  "include": ["typings/**/*"],
+  "exclude": ["node_modules"]
+}

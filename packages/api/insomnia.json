@@ -1,0 +1,186 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2020-05-17T07:49:19.277Z",
+  "__export_source": "insomnia.desktop.app:v7.1.1",
+  "resources": [
+    {
+      "_id": "req_2135c843b1d44da79dbf9b23638788fc",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"lucas\",\n\t\"email\": \"lucashfreitas1@gmail.com\"\n}"
+      },
+      "created": 1587046473775,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_423f211e47b648fc91e967d5cdfddf96",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1587046473775,
+      "method": "POST",
+      "modified": 1587046533603,
+      "name": "Create USER",
+      "parameters": [],
+      "parentId": "fld_cb07773d78784d30865d8f0cdd5ee363",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ baseUrl  }}/users",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_cb07773d78784d30865d8f0cdd5ee363",
+      "created": 1587046308499,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1587046308499,
+      "modified": 1587046308499,
+      "name": "users",
+      "parentId": "wrk_0a3cf554ac334e79ac5e607c8a6bac5f",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_0a3cf554ac334e79ac5e607c8a6bac5f",
+      "created": 1587046168521,
+      "description": "",
+      "modified": 1589701700631,
+      "name": "Serverless API",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_4d991d654816478f9e9bcfd75c3142b3",
+      "authentication": {},
+      "body": {},
+      "created": 1587046321281,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1587046321284,
+      "method": "GET",
+      "modified": 1587282510543,
+      "name": "GET Users",
+      "parameters": [],
+      "parentId": "fld_cb07773d78784d30865d8f0cdd5ee363",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ baseUrl }}/users",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1b2438aa6b7545a8a1ac35b049a792ab",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"lucas\",\n\t\"email\": \"lucashfreitas1@gmail.com\"\n}"
+      },
+      "created": 1587282079791,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_423f211e47b648fc91e967d5cdfddf96",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1587046473775,
+      "method": "POST",
+      "modified": 1587282117887,
+      "name": "Create Customers",
+      "parameters": [],
+      "parentId": "fld_9b4c6db8b31e4ad381d8492f63db2d29",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ baseUrl  }}/customers",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_9b4c6db8b31e4ad381d8492f63db2d29",
+      "created": 1587282079744,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1587046307047.5,
+      "modified": 1587282079744,
+      "name": "customers",
+      "parentId": "wrk_0a3cf554ac334e79ac5e607c8a6bac5f",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_6786fe930be1418dbcf2c834cac47874",
+      "authentication": {},
+      "body": {},
+      "created": 1587282079776,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1587046321284,
+      "method": "GET",
+      "modified": 1587282113460,
+      "name": "GET Customers",
+      "parameters": [],
+      "parentId": "fld_9b4c6db8b31e4ad381d8492f63db2d29",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ baseUrl }}/customers",
+      "_type": "request"
+    },
+    {
+      "_id": "env_0d5b195ba81abefa2bcfff7faf3f2bd2911f28d5",
+      "color": null,
+      "created": 1587046169037,
+      "data": {},
+      "dataPropertyOrder": null,
+      "isPrivate": false,
+      "metaSortKey": 1587046169037,
+      "modified": 1587046169037,
+      "name": "Base Environment",
+      "parentId": "wrk_0a3cf554ac334e79ac5e607c8a6bac5f",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_0d5b195ba81abefa2bcfff7faf3f2bd2911f28d5",
+      "cookies": [],
+      "created": 1587046169055,
+      "modified": 1587046169055,
+      "name": "Default Jar",
+      "parentId": "wrk_0a3cf554ac334e79ac5e607c8a6bac5f",
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "env_8773e587288d4cbdb779a91b397f4e75",
+      "color": null,
+      "created": 1587046180359,
+      "data": { "baseUrl": "http://localhost:3000/dev" },
+      "dataPropertyOrder": { "&": ["baseUrl"] },
+      "isPrivate": false,
+      "metaSortKey": 1587046180359,
+      "modified": 1587046525533,
+      "name": "LOCAL",
+      "parentId": "env_0d5b195ba81abefa2bcfff7faf3f2bd2911f28d5",
+      "_type": "environment"
+    }
+  ]
+}

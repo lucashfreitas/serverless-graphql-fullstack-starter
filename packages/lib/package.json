@@ -1,0 +1,16 @@
+{
+  "name": "@app/lib",
+  "version": "1.0.0",
+  "description": "App common package",
+  "main": "index.js",
+  "author": "Lucas Santos",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "uuid": "^8.3.1"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build"
+  }
+}

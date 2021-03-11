@@ -1,4 +1,6 @@
-import { ObjectDefinitionBlock, stringArg } from '@nexus/schema/dist/core';
+
+import { stringArg } from 'nexus';
+import { ObjectDefinitionBlock } from 'nexus/dist/blocks';
 import { GraphQResolver } from '../../../types';
 
 
@@ -14,12 +16,9 @@ interface GetAllUserResponse {
 
 
 const getAllUsers: GraphQResolver<GetAllUserRequest, GetAllUserResponse> = async (parent, args, ctx) => {
-    const params: AWS.DynamoDB.DocumentClient.ScanInput = {
-        TableName: process.env.USER_TABLE,
-    }
+
     try {
-        const response = await ctx.dynamodb.scan(params).promise();
-        return response.Items;
+        return await ctx.prisma.product.findMany();
     }
 
     catch (err) {
@@ -28,19 +27,16 @@ const getAllUsers: GraphQResolver<GetAllUserRequest, GetAllUserResponse> = async
     }
 
     return null;
-
-
 }
+
 
 export default (t: ObjectDefinitionBlock<"Query">) => {
     t.field('allUsers', {
         args: {
-            name: stringArg({ required: true })
+            name: stringArg()
         },
         type: 'User',
         resolve: getAllUsers
     })
-
-
 }
 

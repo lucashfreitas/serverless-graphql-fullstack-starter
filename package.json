@@ -12,7 +12,7 @@
     "@babel/node": "^7.8.7",
     "@types/aws-lambda": "^8.10.62",
     "@types/dotenv": "^8.2.0",
-    "@types/node": "^14.0.25",
+    "@types/node": "^14.14.33",
     "@types/react": "^16.9.55",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.4.0",
@@ -30,7 +30,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "serverless": "^2.4.0",
-    "serverless-dotenv-plugin": "^3.0.0",
     "serverless-offline": "^6.8.0",
     "serverless-prune-plugin": "^1.4.3",
     "serverless-webpack": "^5.3.5",
@@ -42,7 +41,7 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "date-fns": "^2.16.1",
+    "date-fns": "^2.19.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "reflect-metadata": "^0.1.13"
@@ -61,5 +60,15 @@
     "packages": [
       "packages/*"
     ]
-  }
+  },
+  "noHoist": [
+    "**/@prisma/**",
+    "**/@prisma",
+    "**/prisma/**",
+    "**/prisma",
+    "**/nexus/**",
+    "**/nexus",
+    "**/nexus-plugin-prisma/**",
+    "**/nexus-plugin-prisma"
+  ]
 }

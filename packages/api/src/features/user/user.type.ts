@@ -1,4 +1,5 @@
-import { mutationType, objectType, queryType } from '@nexus/schema';
+
+import { mutationType, objectType, queryType } from 'nexus';
 import addUser from './mutation/addUser';
 import getAllUsers from './query/getAllUsers';
 
@@ -9,7 +10,6 @@ export const UserType = objectType({
         t.string("name")
     }
 });
-
 export const Query = queryType({
     definition: (t) => {
         getAllUsers(t)
@@ -17,11 +17,9 @@ export const Query = queryType({
     }
 })
 
-
 export const Mutation = mutationType({
     definition: (t) => {
         addUser(t)
-
     }
 })
 

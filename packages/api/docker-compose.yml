@@ -1,12 +1,12 @@
 version: '3'
 services:
-  serverless-db:
+  store-db:
     tty: true
-    container_name: serverless-db
+    container_name: store-db
     image: 'mysql:8.0.16'
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: serverless-db
+      MYSQL_DATABASE: store
     ports:
       - '3306:3306'
     networks:

@@ -1,12 +1,11 @@
-import { APIGatewayEvent, Context } from 'aws-lambda';
+import { PrismaClient } from '@prisma/client';
 import AWS from 'aws-sdk';
-
-
+import ApiRequest from '../request';
 
 
 export type GraphqlContext = {
-    event: APIGatewayEvent,
     dynamodb: AWS.DynamoDB.DocumentClient,
-    context: Context
+    request: ApiRequest,
+    prisma: PrismaClient,
 }
 

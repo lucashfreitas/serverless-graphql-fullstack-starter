@@ -1,14 +1,11 @@
 import { RandomId } from '@app/lib';
-import { ObjectDefinitionBlock, stringArg } from '@nexus/schema/dist/core';
+import { stringArg } from 'nexus';
+import { ObjectDefinitionBlock } from 'nexus/dist/blocks';
 import { GraphQResolver } from '../../../types';
-
-
-
 
 interface AddUserRequest {
     name: string;
 }
-
 
 interface UserResponse {
     name: string;
@@ -36,11 +33,10 @@ const addUser: GraphQResolver<AddUserRequest, UserResponse> = async (parent, arg
 
 }
 
-
 export default (t: ObjectDefinitionBlock<"Mutation">) => {
     t.field('addUser', {
         args: {
-            name: stringArg({ required: true })
+            name: stringArg({})
         },
         type: 'User',
         resolve: addUser

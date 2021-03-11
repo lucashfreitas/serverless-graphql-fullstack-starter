@@ -1,28 +1,32 @@
+
+import { PrismaClient } from '@prisma/client';
 import { ApolloServer } from 'apollo-server-lambda';
+import { APIGatewayEvent, Context } from 'aws-lambda';
 import { DynamoDB } from "aws-sdk";
+import ApiRequest from '../request';
 import { GraphqlContext } from './context';
-import schema from "./schema";
+import nexusSchema from "./schema";
+
+const dynamodb = new DynamoDB.DocumentClient();
+const prisma = new PrismaClient()
 
 
-//create all context providers
-const context = {
-  dynamodb: new DynamoDB.DocumentClient()
-};
 
 
 const server = new ApolloServer({
-  schema,
+  schema: nexusSchema,
   introspection: true,
   playground: true,
-  context: (req): GraphqlContext => ({
-    ...req,
-    ...context
+  context: (event: APIGatewayEvent, context: Context): GraphqlContext => ({
+    request: new ApiRequest(event, context),
+    dynamodb,
+    prisma
   }),
 });
 
 
 
-const handler = (event, lambdaContext, callback) => {
+export const handler = (event, lambdaContext, callback) => {
   // Playground handler
   if (event.httpMethod === 'GET') {
     server.createHandler()(
@@ -35,7 +39,6 @@ const handler = (event, lambdaContext, callback) => {
   }
 };
 
-export default handler;
 
 
 

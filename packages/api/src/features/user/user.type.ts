@@ -1,25 +1,28 @@
 
 import { mutationType, objectType, queryType } from 'nexus';
-import addUser from './mutation/addUser';
-import getAllUsers from './query/getAllUsers';
+import userMutations from "./user.mutations";
+import userQueries from "./user.query";
 
 export const UserType = objectType({
     name: 'User',
     definition(t) {
         t.int("id")
-        t.string("name")
+        t.string("first_name")
+        t.string("last_name")
+        t.string("email")
     }
 });
+
 export const Query = queryType({
     definition: (t) => {
-        getAllUsers(t)
+        userQueries(t)
 
     }
 })
 
 export const Mutation = mutationType({
     definition: (t) => {
-        addUser(t)
+        userMutations(t)
     }
 })
 

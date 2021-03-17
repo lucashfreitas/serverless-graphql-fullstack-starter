@@ -24,7 +24,6 @@
     "prisma": "2.18.0"
   },
   "dependencies": {
-    "@app/lib": "1.0.0",
     "@prisma/client": "2.18.0",
     "apollo-server-lambda": "^2.19.0",
     "aws-sdk": "^2.861.0",
